@@ -15,9 +15,34 @@ class GigsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return GigResource::collection(Gig::with('company')->paginate(25));
+        $query = Gig::with('company');
+        if ($request->has('name')) {
+            $query->whereRaw(
+                "MATCH(name) AGAINST(?)",
+                $request->input('name')
+            );
+            $query->orWhere('name', 'like', "%" . $request->input('name') . "%");
+        }
+        if ($request->has('description')) {
+            $query->whereRaw(
+                "MATCH(description) AGAINST(?)",
+                $request->input('description')
+            );
+            $query->orWhere('description', 'like', "%" . $request->input('description') . "%");
+        }
+        if ($request->has('company_id')) {
+            $query->where('company_id', $request->input('company_id'));
+        }
+        if ($request->has('status')) {
+            $query->where('status', $request->input('status'));
+        }
+        if ($request->has('posted')) {
+            $query->where('posted', $request->input('posted'));
+        }
+
+        return GigResource::collection($query->paginate(25));
     }
 
     /**

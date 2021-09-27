@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
 
 class CreateGigsTable extends Migration
 {
@@ -26,6 +28,9 @@ class CreateGigsTable extends Migration
             $table->enum('status', ['Not started', 'Started', 'Finished']);
             $table->timestamps();
         });
+
+        // Because Laravel doesn't support full text search migration
+        DB::statement('ALTER TABLE `posts` ADD FULLTEXT INDEX post_title_index (title)');
     }
 
     /**
