@@ -33,6 +33,16 @@ Route::group([
     });
 });
 
-Route::get('companies', [CompaniesController::class, 'index']);
-Route::get('companies/{id}', [CompaniesController::class, 'show']);
-Route::post('companies', [CompaniesController::class, 'store']);
+
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
+    // Route::apiResource('companies', 'CompaniesController');
+    Route::get('companies', [CompaniesController::class, 'index']);
+    Route::get('companies/{company}', [CompaniesController::class, 'show']);
+    Route::post('companies', [CompaniesController::class, 'store']);
+    Route::put('/companies/{company}', [CompaniesController::class, 'update']);
+    Route::delete('/companies/{company}', [CompaniesController::class, 'destroy']);
+});
+
+
