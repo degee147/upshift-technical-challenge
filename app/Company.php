@@ -21,4 +21,14 @@ class Company extends Model
     {
         return $this->hasMany(Gig::class);
     }
+
+    public function getTotalGigs()
+    {
+        return $this->hasMany(Gig::class)->where('company_id', $this->id)->count();
+    }
+
+    public function getStartedGigs()
+    {
+        return $this->hasMany(Gig::class)->where('status', "Started")->count();
+    }
 }

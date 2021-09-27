@@ -22,8 +22,8 @@ class CompanyResource extends JsonResource
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'user' => $this->user,
-            'posted_gigs' => 'laravel method to return count of posted gigs',
-            'started_gigs' => 'query where time > timestamp', //this means we will send date but save as time() for gigs
+            'posted_gigs' => $this->getTotalGigs(),
+            'started_gigs' => $this->getStartedGigs()
         ];
     }
 }
