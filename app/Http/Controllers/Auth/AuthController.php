@@ -13,7 +13,6 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-
         $rules = [
             'email' => 'required|string|email',
             'password' => 'required|string'
@@ -72,6 +71,13 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update($request->all());
+        return response()->json($user);
     }
 
     public function logout(Request $request)
