@@ -18,8 +18,8 @@ class CreateGigsTable extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->string('name');
             $table->text('description');
-            $table->string('timestamp_start');
-            $table->string('timestamp_end');
+            $table->dateTime('timestamp_start');
+            $table->dateTime('timestamp_end');
             $table->integer('number_of_positions');
             $table->double('pay_per_hour', 8, 2);
             $table->boolean('posted')->default(0);

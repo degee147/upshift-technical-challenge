@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\GigsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,13 @@ Route::group([
     Route::post('companies', [CompaniesController::class, 'store']);
     Route::put('/companies/{company}', [CompaniesController::class, 'update']);
     Route::delete('/companies/{company}', [CompaniesController::class, 'destroy']);
+
+
+    Route::get('gigs', [GigsController::class, 'index']);
+    Route::get('gigs/{gig}', [GigsController::class, 'show']);
+    Route::post('gigs', [GigsController::class, 'store']);
+    Route::put('/gigs/{gig}', [GigsController::class, 'update']);
+    Route::delete('/gigs/{gig}', [GigsController::class, 'destroy']);
 });
 
 

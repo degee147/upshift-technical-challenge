@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompanyResource extends JsonResource
+class GigResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +18,13 @@ class CompanyResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'address' => $this->address,
-            'created_at' => (string) $this->created_at,
-            'updated_at' => (string) $this->updated_at,
-            'user' => $this->user,
-            'posted_gigs' => 'laravel method to return count of posted gigs',
-            'started_gigs' => 'query where time > timestamp', //this means we will send date but save as time() for gigs
+            'timestamp_start' => $this->timestamp_start,
+            'timestamp_end' =>  $this->timestamp_end,
+            'number_of_positions' =>  $this->number_of_positions,
+            'pay_per_hour' => $this->pay_per_hour,
+            'posted' => $this->posted,
+            'status' => $this->status,
+            'company' => $this->company
         ];
     }
 }
